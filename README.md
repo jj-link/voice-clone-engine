@@ -4,8 +4,6 @@ A robust, multi-GPU voice cloning system capable of generating high-quality synt
 
 ## Features
 
-- Multi-GPU support with dynamic resource management
-- Advanced GPU selection and monitoring capabilities
 - Flexible configuration system
 - Comprehensive test coverage
 
@@ -31,12 +29,27 @@ pip install -r requirements.txt
 
 ## Usage
 
-The system provides a flexible GPU management system that can be used as follows:
+🚧 This project is currently under development. The core voice cloning functionality is being actively implemented.
+
+For development status and planned features, see `REQUIREMENTS.md`.
+
+### Running Demos
+
+The project includes a voice embedding visualization demo:
+```bash
+cd demos
+./run_embedding_demo.bat  # On Windows
+```
+
+This will generate t-SNE plots and similarity matrices in the `plots` directory.
+
+### GPU Management
+
+🚧 Command-line GPU configuration is coming soon. For now, GPU management is available programmatically:
 
 ```python
 from src.gpu_manager import GPUManager
 
-# Use as context manager
 with GPUManager() as gpu_manager:
     # Get available GPU information
     gpu_info = gpu_manager.get_gpu_info()
@@ -47,6 +60,13 @@ with GPUManager() as gpu_manager:
     # Or let the system select the best GPUs
     best_gpus = gpu_manager.parse_gpu_args("best2")  # Select 2 best GPUs
 ```
+
+## Output
+
+Generated files will be saved in the following directories:
+- `output/`: Generated audio files
+- `plots/`: Visualization outputs
+- `logs/`: Training and inference logs
 
 ## Testing
 
@@ -61,7 +81,6 @@ python -m pytest tests/
 voice-cloning-ai/
 ├── configs/           # Configuration files
 ├── data/             # Dataset storage (gitignored)
-├── models/           # Model checkpoints (gitignored)
 ├── src/              # Source code
 │   └── gpu_manager.py
 └── tests/            # Unit tests
