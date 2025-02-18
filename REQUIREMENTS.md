@@ -38,16 +38,16 @@ An AI system designed to clone voices from MP3 audio samples, featuring multi-GP
      ✅ Verify audio metadata extraction
      ✅ Handle files of varying lengths
 
-2. **Audio Cleaning Pipeline** ⏳
+2. **Audio Cleaning Pipeline** ✅
    - Priority: High
    - Features:
-     - Background noise reduction
-     - Audio normalization
-     - Silence removal
+     ✅ Background noise reduction
+     ✅ Audio normalization
+     ✅ Silence removal
    - Acceptance Criteria:
-     - >10dB noise reduction
-     - Maintain voice quality after cleaning
-     - Process 1 hour of audio in under 5 minutes
+     ✅ >10dB noise reduction
+     ✅ Maintain voice quality after cleaning
+     ✅ Process 1 hour of audio in under 5 minutes
 
 3. **Dataset Management** ⏳
    - Priority: Medium
