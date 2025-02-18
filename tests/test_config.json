@@ -1,0 +1,19 @@
+{
+    "model": {
+        "name": "test_diarization_model",
+        "pretrained_path": null
+    },
+    "processing": {
+        "sample_rate": 16000,
+        "min_speech_duration": 0.2,
+        "min_silence_duration": 0.1,
+        "speech_pad_duration": 0.1
+    },
+    "diarization": {
+        "min_speakers": 1,
+        "max_speakers": 8,
+        "overlap_threshold": 0.5,
+        "frame_length": 1024,
+        "hop_length": 512
+    }
+}

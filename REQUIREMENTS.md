@@ -49,6 +49,20 @@ An AI system designed to clone voices from MP3 audio samples, featuring multi-GP
      ✅ Maintain voice quality after cleaning
      ✅ Process 1 hour of audio in under 5 minutes
 
+2.5. **Speaker Diarization** ⏳
+   - Priority: High
+   - Features:
+     - Speaker detection and separation
+     - Timeline segmentation by speaker
+     - Multiple speaker handling
+     - Voice activity detection
+   - Acceptance Criteria:
+     - >95% accuracy in speaker identification
+     - Correct handling of overlapping speech
+     - Proper isolation of target speaker
+     - Real-time processing capability
+     - Export of clean, single-speaker segments
+
 3. **Dataset Management** ⏳
    - Priority: Medium
    - Features:
