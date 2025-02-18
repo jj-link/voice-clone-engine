@@ -22,27 +22,27 @@ This document outlines both completed work and future steps for the Voice Clone 
 - [x] Maintain voice quality after cleaning
 - [x] Process 1 hour of audio in under 5 minutes
 
-#### 1.3 GPU Management System 
-- [x] Implement dynamic multi-GPU detection
-- [x] Add flexible GPU allocation strategies
+#### 1.3 Resource Management System 
+- [x] Implement dynamic resource detection
+- [x] Add flexible resource allocation strategies
 - [x] Create resource monitoring
 - [x] Implement load balancing
-- [x] Add topology-aware GPU selection
+- [x] Add topology-aware resource selection
 - [x] Create memory usage limits
-- [x] Support various GPU selection modes:
+- [x] Support various resource selection modes:
   ```bash
-  --gpu all                # Use all available GPUs
-  --gpu 0,2,5             # Use specific GPUs by index
-  --gpu range:0-3         # Use GPUs 0 through 3
-  --gpu count:3           # Use any 3 available GPUs
-  --gpu-exclude 1,3       # Use all GPUs except 1 and 3
-  --gpu-memory-limit 80   # Limit each GPU's memory usage to 80%
-  --gpu-strategy balanced # Distribute load evenly
+  --resource all                # Use all available resources
+  --resource cpu                # Use CPU only
+  --resource gpu                # Use GPU only
+  --resource count:3           # Use any 3 available resources
+  --resource-exclude cpu       # Use all resources except CPU
+  --resource-memory-limit 80   # Limit each resource's memory usage to 80%
+  --resource-strategy balanced # Distribute load evenly
   ```
 
 #### 1.4 Voice Embedding System 
 - [x] Implement ECAPA-TDNN based voice embedding
-- [x] Add GPU acceleration support
+- [x] Add resource acceleration support
 - [x] Create voice similarity computation
 - [x] Achieve >95% speaker verification accuracy
 - [x] Enable real-time processing
@@ -66,16 +66,8 @@ This document outlines both completed work and future steps for the Voice Clone 
 - [ ] Implement real-time processing
 - [ ] Integrate with audio cleaning
 
-#### 1.7 Dataset Management System
-- [ ] Create `DatasetManager` class
-  ```python
-  class DatasetManager:
-      def __init__(self):
-          self.root_dir = Path("datasets")
-          self.metadata_store = {}
-          self.version_info = {}
-  ```
-- [ ] Implement file organization structure:
+#### 1.7 Basic File Organization
+- [ ] Create standardized directory structure
   ```
   datasets/
   ├── raw/                 # Original audio files
@@ -85,13 +77,58 @@ This document outlines both completed work and future steps for the Voice Clone 
   ├── models/             # Trained models
   └── metadata/           # JSON metadata files
   ```
-- [ ] Add metadata tracking system
-  - Speaker information
-  - Processing history
-  - Quality metrics
-- [ ] Implement version control for datasets
-- [ ] Create caching mechanism for processed files
-- [ ] Add data validation and integrity checks
+- [ ] Implement basic file operations
+- [ ] Add path validation
+- [ ] Create error handling for file operations
+
+#### 1.8 Metadata System
+- [ ] Design metadata schema for audio files
+- [ ] Create JSON-based metadata storage
+- [ ] Implement speaker information tracking
+- [ ] Add processing history logging
+- [ ] Create quality metrics tracking
+
+#### 1.9 Dataset Versioning
+- [ ] Implement dataset version tracking
+- [ ] Create snapshot system
+- [ ] Add rollback functionality
+- [ ] Handle version conflicts
+- [ ] Implement backup system
+
+#### 1.10 Caching System
+- [ ] Design caching strategy
+- [ ] Implement cache storage
+- [ ] Add cache invalidation rules
+- [ ] Create cache cleanup system
+- [ ] Add memory usage monitoring
+
+#### 1.11 Data Validation
+- [ ] Implement file integrity checks
+- [ ] Create format validation
+- [ ] Add metadata validation
+- [ ] Implement quality checks
+- [ ] Create validation reporting
+
+#### 1.12 Data Access API
+- [ ] Design API interface
+- [ ] Implement CRUD operations
+- [ ] Add batch processing support
+- [ ] Create search functionality
+- [ ] Add filtering capabilities
+
+#### 1.13 Performance Optimization
+- [ ] Implement parallel processing
+- [ ] Add batch operations
+- [ ] Optimize file I/O
+- [ ] Implement caching strategies
+- [ ] Add progress tracking
+
+#### 1.14 Error Recovery
+- [ ] Implement transaction system
+- [ ] Add rollback capabilities
+- [ ] Create error logging
+- [ ] Add automatic recovery
+- [ ] Implement backup system
 
 ### Phase 2: Text-to-Speech Core (Weeks 3-4)
 
@@ -118,11 +155,11 @@ This document outlines both completed work and future steps for the Voice Clone 
 - [ ] Implement mel spectrogram generation
 - [ ] Add vocoder system
 - [ ] Integrate voice embedding
-- [ ] Optimize GPU usage
+- [ ] Optimize resource usage
 
 #### 2.3 Runtime Optimization
 - [ ] Implement batch processing
-- [ ] Add GPU memory management
+- [ ] Add resource memory management
 - [ ] Create pipeline parallelization
 - [ ] Optimize data transfers
 
@@ -145,7 +182,7 @@ This document outlines both completed work and future steps for the Voice Clone 
 #### 4.1 Command Line Interface
 - [ ] Design command structure:
   ```bash
-  voice-clone train --input <dir> --model <name> --gpu <ids>
+  voice-clone train --input <dir> --model <name> --resource <ids>
   voice-clone generate --text "Hello" --voice <model> --output <file>
   voice-clone process --input <file> --output <dir>
   voice-clone evaluate --model <name> --test-data <dir>
@@ -214,7 +251,8 @@ Before committing:
 - [ ] Documentation updated
 - [ ] Code follows project style
 - [ ] No debug code left
-- [ ] Performance impact considered
+- [ ] Error handling is comprehensive
+- [ ] Input validation is complete
 
 ### Commit Categories
 Use these prefixes for commits:
@@ -238,13 +276,82 @@ git commit -m "feat: Add real-time speaker diarization
 - Performance: processes 1hr audio in <5min"
 ```
 
+## Progress Tracking
+
+For each task:
+1. Create feature branch if change is substantial
+2. Write and update tests
+3. Implement functionality
+4. Verify tests pass
+5. Update documentation
+6. Commit and merge at meaningful checkpoints:
+   * When a feature is complete
+   * When test suite passes
+   * When API changes are finalized
+   * When performance goals are met
+
+### Branch Strategy
+- Use feature branches for major changes
+- Direct commits to main for small fixes
+- Maintain clean commit history
+- Tag significant versions
+
+### Commit Guidelines
+- Commit at meaningful checkpoints
+- Ensure all tests pass before committing
+- Group related changes together
+- Keep unrelated changes separate
+- Write clear commit messages:
+  ```
+  feat: Add speaker diarization
+  - Implement voice activity detection
+  - Add speaker clustering
+  - Create speaker embedding system
+  - All tests passing at 95% accuracy
+  ```
+
+### Documentation Updates
+- Keep REFACTOR_PLAN.md current
+- Update README.md as needed
+- Document API changes
+- Add code comments
+- Document resource requirements
+
+### Testing Approach
+- Write tests first (TDD)
+- Run full test suite before merging
+- Test with various resource configurations
+- Document test scenarios
+
+## Notes
+- Support flexible resource allocation
+- Maintain backward compatibility
+- Focus on code readability
+- Keep documentation updated
+- Test across different configurations
+- Follow TDD principles
+- Commit at meaningful checkpoints
+- Write descriptive commit messages
+- Push changes after each stable feature
+
 ## Acceptance Criteria
 
 ### Performance
-- Process 1 hour of audio in < 5 minutes
-- Generate speech in < 3s per sentence
-- GPU memory usage < 80%
-- CPU usage < 60%
+- Audio Processing:
+  * Process 1 hour of audio in < 5 minutes (diarization)
+  * Real-time speaker identification for streaming
+  * Flexible resource allocation based on availability
+
+- Speech Generation:
+  * < 3s generation time per sentence
+  * Real-time voice cloning after initial training
+  * Streaming capability for long-form content
+
+- Resource Management:
+  * Configurable device selection (CPU/GPU)
+  * Adjustable batch sizes
+  * Flexible memory usage limits
+  * Graceful fallback options
 
 ### Quality
 - Speaker identification accuracy > 95%
@@ -252,30 +359,13 @@ git commit -m "feat: Add real-time speaker diarization
 - Human evaluation score > 4/5
 - Clear pronunciation
 - Natural-sounding speech
+- Consistent voice characteristics
 
 ### Usability
 - Clear error messages
 - Comprehensive help documentation
 - Intuitive command structure
 - Proper progress feedback
-
-## Progress Tracking
-
-For each task:
-1. Create feature branch
-2. Implement functionality
-3. Write tests
-4. Create PR
-5. Review & merge
-6. Update documentation
-
-## Notes
-- Prioritize GPU optimization throughout
-- Maintain backward compatibility
-- Focus on code readability
-- Keep documentation updated
-- Regular performance testing
-- Follow TDD principles
-- Commit early and often
-- Write descriptive commit messages
-- Push changes after each feature completion
+- Graceful error handling
+- Flexible configuration options
+- Resource allocation controls
