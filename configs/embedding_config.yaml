@@ -1,0 +1,32 @@
+# Voice Embedding System Configuration
+
+model:
+  # Using ECAPA-TDNN as our embedding model
+  name: "ECAPA-TDNN"
+  pretrained_path: "speechbrain/spkrec-ecapa-voxceleb"
+  embedding_dim: 192
+  
+processing:
+  # Audio processing parameters for embedding extraction
+  sample_rate: 16000
+  chunk_duration: 3.0  # seconds
+  overlap: 0.5  # overlap between chunks
+  min_chunks: 5  # minimum number of chunks required for reliable embedding
+  
+similarity:
+  # Parameters for comparing voice embeddings
+  cosine_threshold: 0.75  # minimum similarity score to consider same speaker
+  use_mean_pooling: true  # use mean pooling for multiple embeddings
+  
+optimization:
+  # Performance optimization settings
+  batch_size: 32
+  use_gpu: true
+  gpu_id: 0  # will be overridden by gpu_manager if needed
+  fp16: true  # use half precision when possible
+  
+cache:
+  # Caching settings for embeddings
+  enabled: true
+  max_cache_size: 1000  # number of embeddings to keep in memory
+  persistence_path: "cache/embeddings"

@@ -141,6 +141,29 @@ class GPUManager:
             }
         return info
 
+    def get_gpu_with_most_memory(self) -> int:
+        """Get the GPU with the most free memory."""
+        self._check_shutdown()
+        gpu_metrics = []
+        for idx, device in self.devices.items():
+            info = nvmlDeviceGetMemoryInfo(device['handle'])
+            gpu_metrics.append((idx, info.free))
+        gpu_metrics.sort(key=lambda x: x[1], reverse=True)
+        return gpu_metrics[0][0]
+
+    def get_device(self) -> torch.device:
+        """Get the most suitable device for processing.
+        
+        Returns:
+            torch.device: The selected device (CPU or GPU)
+        """
+        if not self.device_count:
+            return torch.device('cpu')
+            
+        # Get the GPU with the most free memory
+        gpu_id = self.get_gpu_with_most_memory()
+        return torch.device(f'cuda:{gpu_id}')
+
     def setup_torch_devices(self, gpu_indices: List[int], memory_limit: Optional[int] = None):
         """Setup PyTorch to use specified GPUs with optional memory limits.
         
