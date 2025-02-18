@@ -1,0 +1,22 @@
+gpu_settings:
+  # GPU selection strategy (all, specific indices, range, or count)
+  selection: "all"
+  
+  # Memory limit per GPU as percentage (optional)
+  memory_limit: 90
+  
+  # Load balancing strategy (balanced, memory-based, capability-based)
+  strategy: "balanced"
+  
+  # Monitoring settings
+  monitoring:
+    enabled: true
+    interval_seconds: 5
+    log_to_file: true
+    log_path: "logs/gpu_usage.log"
+    
+  # Warning thresholds
+  warnings:
+    memory_threshold: 95  # Percentage
+    temperature_threshold: 80  # Celsius
+    utilization_threshold: 98  # Percentage
