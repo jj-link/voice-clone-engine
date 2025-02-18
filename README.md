@@ -1,4 +1,4 @@
-# Voice Cloning AI
+# Voice Clone Engine
 
 A robust, multi-GPU voice cloning system capable of generating high-quality synthetic voices from audio samples.
 

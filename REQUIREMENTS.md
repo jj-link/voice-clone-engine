@@ -1,4 +1,4 @@
-# Voice Cloning AI - Project Requirements Document
+# Voice Clone Engine - Project Requirements Document
 
 ## Project Overview
 An AI system designed to clone voices from MP3 audio samples, featuring multi-GPU support, background noise handling, and high-quality speech synthesis.
