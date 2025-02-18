@@ -1,0 +1,35 @@
+audio_cleaning:
+  # Noise Reduction
+  noise_reduction:
+    method: 'spectral_gating'  # Options: spectral_gating, adaptive_wiener
+    n_std_thresh: 1.5          # Number of standard deviations for noise threshold
+    prop_decrease: 1.0         # Scale factor for noise reduction
+    n_fft: 2048               # FFT window size
+    win_length: 2048          # Window length for STFT
+    hop_length: 512           # Hop length for STFT
+    n_jobs: -1                # Number of jobs for parallel processing (-1 for all cores)
+    
+  # Normalization
+  normalization:
+    target_db: -23.0          # Target dBFS (industry standard for broadcast)
+    headroom_db: 3.0          # Headroom to prevent clipping
+    method: 'peak'            # Options: peak, rms
+    
+  # Silence Removal
+  silence_removal:
+    min_silence_len: 500      # Minimum length of silence (ms)
+    silence_thresh: -40       # Silence threshold (dB)
+    keep_silence: 200         # Amount of silence to keep on either side (ms)
+    chunk_size: 10           # Chunk size for processing (ms)
+    
+  # Audio Quality
+  quality:
+    min_duration: 0.1         # Minimum duration after cleaning (seconds)
+    max_duration: 30.0        # Maximum duration after cleaning (seconds)
+    min_speech_percent: 20    # Minimum percentage of speech content
+    
+  # Processing
+  processing:
+    batch_size: 32            # Batch size for parallel processing
+    use_gpu: true            # Whether to use GPU for processing when available
+    precision: 'float32'      # Numerical precision
