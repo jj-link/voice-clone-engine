@@ -1,0 +1,35 @@
+audio_processing:
+  # Sample rate for all audio processing
+  sample_rate: 22050
+  
+  # Duration settings
+  min_duration: 0.1  # Minimum duration in seconds
+  max_duration: 30.0  # Maximum duration in seconds
+  
+  # Audio format settings
+  supported_formats:
+    - mp3
+    - wav
+    - flac
+  
+  # Processing settings
+  chunk_size: 32768  # Size of audio chunks for processing
+  normalize: true    # Whether to normalize audio by default
+  
+  # Batch processing
+  batch_size: 32     # Number of files to process in parallel
+  num_workers: 4     # Number of worker processes for data loading
+  
+  # Output format
+  output_format: wav
+  output_sample_rate: 22050
+  output_channels: 1  # Mono audio
+  
+  # Metadata to extract
+  extract_metadata:
+    - duration
+    - sample_rate
+    - channels
+    - bitrate
+    - format
+    - codec
