@@ -175,6 +175,69 @@ This document outlines both completed work and future steps for the Voice Clone 
 - [ ] Add architecture diagrams
 - [ ] Write deployment guide
 
+## Development Guidelines
+
+### Test-Driven Development (TDD)
+For each new feature or modification:
+1. Write failing tests first
+   - Define expected behavior
+   - Cover edge cases
+   - Consider performance requirements
+2. Implement minimum code to pass tests
+3. Refactor while keeping tests green
+4. Update documentation
+
+### Version Control Practices
+After each meaningful change:
+1. Run all tests to ensure nothing broke
+2. Stage changes:
+   ```bash
+   git add <modified_files>
+   ```
+3. Create descriptive commit:
+   ```bash
+   git commit -m "Category: Detailed description
+
+   - Bullet points for specific changes
+   - Include any breaking changes
+   - Note any performance impacts"
+   ```
+4. Push to remote:
+   ```bash
+   git push origin main
+   ```
+
+### Code Review Checklist
+Before committing:
+- [ ] All tests pass
+- [ ] New tests added for new functionality
+- [ ] Documentation updated
+- [ ] Code follows project style
+- [ ] No debug code left
+- [ ] Performance impact considered
+
+### Commit Categories
+Use these prefixes for commits:
+- feat: New feature
+- fix: Bug fix
+- test: Adding/updating tests
+- docs: Documentation updates
+- perf: Performance improvements
+- refactor: Code restructuring
+- style: Formatting, missing semicolons, etc.
+- chore: Updating build tasks, package manager configs, etc.
+
+Example commit:
+```bash
+git commit -m "feat: Add real-time speaker diarization
+
+- Implement streaming audio processing
+- Add confidence score calculation
+- Create pipeline interface
+- Update tests for real-time scenarios
+- Performance: processes 1hr audio in <5min"
+```
+
 ## Acceptance Criteria
 
 ### Performance
@@ -212,3 +275,7 @@ For each task:
 - Focus on code readability
 - Keep documentation updated
 - Regular performance testing
+- Follow TDD principles
+- Commit early and often
+- Write descriptive commit messages
+- Push changes after each feature completion
