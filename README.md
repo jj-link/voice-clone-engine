@@ -1,25 +1,28 @@
 # Voice Clone Engine
 
-A robust, multi-GPU voice cloning system capable of generating high-quality synthetic voices from audio samples.
+A robust, flexible voice cloning system with advanced speaker diarization and configurable resource management.
 
 ## Features
 
-- Flexible configuration system
+- Advanced speaker diarization
+- Flexible resource allocation (CPU/GPU)
 - Comprehensive test coverage
+- Efficient caching system
+- Modular pipeline design
 
 ## Requirements
 
-- Python 3.8+
-- CUDA-compatible NVIDIA GPU(s)
-- PyTorch with CUDA support
-- NVIDIA drivers and CUDA toolkit
+- Python 3.13.2
+- PyTorch 2.1.0
+- torchaudio 2.1.0
+- Compatible with both CPU and GPU environments
 
 ## Installation
 
 1. Clone the repository:
 ```bash
 git clone [your-repo-url]
-cd voice-cloning-ai
+cd voice-clone-engine
 ```
 
 2. Install dependencies:
@@ -29,44 +32,54 @@ pip install -r requirements.txt
 
 ## Usage
 
-🚧 This project is currently under development. The core voice cloning functionality is being actively implemented.
+🚧 This project is currently under development. For development status and planned features, see:
+- `REFACTOR_PLAN.md` - Detailed development roadmap
+- `REQUIREMENTS.md` - Project specifications and requirements
 
-For development status and planned features, see `REQUIREMENTS.md`.
+### Resource Management
+
+The system supports flexible resource allocation:
+
+```python
+from src.resource_manager import ResourceManager
+
+with ResourceManager() as rm:
+    # Get available resource information
+    resource_info = rm.get_resource_info()
+    
+    # Configure resource usage
+    rm.configure("--resource all")                # Use all available resources
+    rm.configure("--resource cpu")                # CPU only
+    rm.configure("--resource gpu")                # GPU only
+    rm.configure("--resource count:3")            # Use any 3 available resources
+    rm.configure("--resource-exclude cpu")        # Use all except CPU
+    rm.configure("--resource-memory-limit 80")    # Limit memory usage to 80%
+    rm.configure("--resource-strategy balanced")  # Distribute load evenly
+```
 
 ### Running Demos
 
-The project includes a voice embedding visualization demo:
+The project includes several demos:
 ```bash
 cd demos
-./run_embedding_demo.bat  # On Windows
+python embedding_demo.py     # Voice embedding visualization
+python diarization_demo.py   # Speaker diarization
+python caching_demo.py       # Performance impact of caching
 ```
 
-This will generate t-SNE plots and similarity matrices in the `plots` directory.
+## Project Structure
 
-### GPU Management
-
-🚧 Command-line GPU configuration is coming soon. For now, GPU management is available programmatically:
-
-```python
-from src.gpu_manager import GPUManager
-
-with GPUManager() as gpu_manager:
-    # Get available GPU information
-    gpu_info = gpu_manager.get_gpu_info()
-    
-    # Select specific GPUs
-    devices = gpu_manager.setup_torch_devices([0, 1])  # Use GPUs 0 and 1
-    
-    # Or let the system select the best GPUs
-    best_gpus = gpu_manager.parse_gpu_args("best2")  # Select 2 best GPUs
 ```
-
-## Output
-
-Generated files will be saved in the following directories:
-- `output/`: Generated audio files
-- `plots/`: Visualization outputs
-- `logs/`: Training and inference logs
+voice-clone-engine/
+├── configs/           # Configuration files
+├── data/             # Dataset storage (gitignored)
+├── demos/            # Demo scripts
+├── src/              # Source code
+│   ├── speaker_diarizer.py
+│   └── resource_manager.py
+├── tests/            # Unit tests
+└── plots/            # Visualization outputs
+```
 
 ## Testing
 
@@ -75,16 +88,7 @@ Run the test suite:
 python -m pytest tests/
 ```
 
-## Project Structure
-
-```
-voice-cloning-ai/
-├── configs/           # Configuration files
-├── data/             # Dataset storage (gitignored)
-├── src/              # Source code
-│   └── gpu_manager.py
-└── tests/            # Unit tests
-```
+For development guidelines and testing practices, see `REFACTOR_PLAN.md`.
 
 ## License
 
@@ -92,4 +96,4 @@ voice-cloning-ai/
 
 ## Contributing
 
-[Your contribution guidelines]
+See `REFACTOR_PLAN.md` for development guidelines and workflow.
